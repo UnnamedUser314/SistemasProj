@@ -2,8 +2,6 @@ let decimalIpValue = document.getElementById("decimal_ip_value"),
              binaryIpValue=document.getElementById("binary_ip_value"), marcsStringValue = document.getElementById("marcs_string_value"),
              ipOfRedValue=document.getElementById("ip_of_red_value");
 let button1 = document.getElementById('butt1');
-const input = document.getElementById('input-id'); 
-const value = input.value; 
 
 
 function generateIp() {
@@ -33,8 +31,9 @@ function convertIpToBinary(ip){
     return strRes;
 }
 function generateMarcsLine() {
+    var marcsNum = document.getElementById('inputik').value;    
     let res = '';
-    let marcs=Math.floor(Math.random()*32);
+    let marcs=marcsNum;
     
     for(let i = 0; i < marcs; i++){
         res+='1';
