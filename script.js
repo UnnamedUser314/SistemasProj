@@ -1,5 +1,9 @@
-let button = document.getElementById("butt"), decimalIpValue = document.getElementById("decimal_ip_value"),
-             binaryIpValue=document.getElementById("binary_ip_value");
+let decimalIpValue = document.getElementById("decimal_ip_value"),
+             binaryIpValue=document.getElementById("binary_ip_value"), marcsStringValue = document.getElementById("marcs_string_value"),
+             ipOfRedValue=document.getElementById("ip_of_red_value");
+let button1 = document.getElementById('butt1');
+const input = document.getElementById('input-id'); 
+const value = input.value; 
 
 
 function generateIp() {
@@ -28,12 +32,54 @@ function convertIpToBinary(ip){
     }
     return strRes;
 }
+function generateMarcsLine() {
+    let res = '';
+    let marcs=Math.floor(Math.random()*32);
+    
+    for(let i = 0; i < marcs; i++){
+        res+='1';
+        if(res.length==8||res.length==17||res.length==26){
+            res+='.';
+        }
+    }
+    for(let i = marcs; i < 32; i++){
+        res+='0';
+        if(res.length==8||res.length==17||res.length==26){
+            res+='.';
+        }
+    }
+    
 
-button.addEventListener("click", function() {
+    return res;
+}
+function generateIpAdressOfTheRed(ipBin, marcsStr) {
+    let res = '';
+
+    for (let i = 0; i < 35; i++){
+        if(ipBin.charAt(i)=='1'&&marcsStr.charAt(i)=='1'){
+            res+='1';
+        } else if(ipBin.charAt(i)=='.'&&marcsStr.charAt(i)=='.'){
+            res+='.';
+        } else {
+            res+='0';
+        }
+    }
+
+    return res;
+}
+
+
+
+button1.addEventListener("click", function() {
     let ip = generateIp();
     let ipBin = convertIpToBinary(ip);
+    let marcsStr = generateMarcsLine();
+    let ipOfRed = generateIpAdressOfTheRed(ipBin, marcsStr);
     decimalIpValue.textContent = ip;
     binaryIpValue.textContent=ipBin;
+    marcsStringValue.textContent=marcsStr;
+    ipOfRedValue.textContent=ipOfRed;
+
 });
 
 
